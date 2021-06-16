@@ -1,4 +1,4 @@
-package com.jaeseok.restfulproject;
+package com.jaeseok.restfulproject.helloworld;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
