@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -32,6 +33,20 @@ public class UserService {
         for(User user : users) {
             if(user.getId() == id) return user;
         }
+        return null;
+    }
+
+    public User deleteById(long id) {
+        Iterator<User> iterator = users.iterator();
+
+        while(iterator.hasNext()) {
+            User user = iterator.next();
+            if (user.getId() == id) {
+                iterator.remove();
+                return user;
+            }
+        }
+
         return null;
     }
 }
