@@ -1,9 +1,12 @@
 package com.jaeseok.restfulproject.user;
 
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class UserService {
     private static List<User> users = new ArrayList<>();
     static {
@@ -11,6 +14,7 @@ public class UserService {
         users.add(new User(2L, "John", new Date()));
         users.add(new User(3L, "Michal", new Date()));
     }
+
 
     public User save(User user) {
         if(user.getId() == null) {
