@@ -36,6 +36,17 @@ public class UserService {
         return null;
     }
 
+    public User update(User user){
+        for(User updatedUser : users){
+            if(updatedUser.getId() == user.getId()) {
+                updatedUser.setName(user.getName());
+                updatedUser.setJoinDate(user.getJoinDate());
+                return updatedUser;
+            }
+        }
+        return null;
+    }
+
     public User deleteById(long id) {
         Iterator<User> iterator = users.iterator();
 
