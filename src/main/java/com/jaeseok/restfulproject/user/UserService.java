@@ -11,9 +11,9 @@ import java.util.List;
 public class UserService {
     private static List<User> users = new ArrayList<>();
     static {
-        users.add(new User(1L, "JaeSeok", new Date()));
-        users.add(new User(2L, "John", new Date()));
-        users.add(new User(3L, "Michal", new Date()));
+        users.add(new User(1L, "JaeSeok", new Date(), "pass1", "121212-1212121"));
+        users.add(new User(2L, "John", new Date(), "pass2", "232323-2323232"));
+        users.add(new User(3L, "Michal", new Date(), "pass3", "343434-3434343"));
     }
 
 
