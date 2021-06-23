@@ -1,6 +1,8 @@
 package com.jaeseok.restfulproject.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -35,12 +37,16 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    public User retrieveUser(@PathVariable long id) {
+    public EntityModel<User> retrieveUser(@PathVariable long id) {
         User user = userService.findOne(id);
 
         if (user == null) throw new UserNotFoundException(String.format("ID[%s] not found", id));
 
-        return user;
+        EntityModel<User> entityModel = EntityModel.of(user);
+        WebMvcLinkBuilder linkBuilder = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).retrieveAllUsers());
+        entityModel.add(linkBuilder.withRel("all-users"));
+
+        return entityModel;
     }
 
     @PutMapping("/users")

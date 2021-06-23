@@ -14,7 +14,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonFilter("UserInfo")
+// @JsonFilter("UserInfo")
 public class User {
 
     private Long id;
