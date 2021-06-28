@@ -19,6 +19,9 @@ public class UserJpaController {
     @Autowired
     public UserRepository userRepository;
 
+    @Autowired
+    public PostRepository postRepository;
+
     @PostMapping("/users")
     public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
         User savedUser = userRepository.save(user);
@@ -51,12 +54,30 @@ public class UserJpaController {
     }
 
     @DeleteMapping("/users/{id}")
-    public void deleteUser(@PathVariable(name = "id") Long id) {
+    public void deleteUser(@PathVariable(name = "id") long id) {
         userRepository.deleteById(id);
     }
 
+    @PostMapping("/users/{id}/posts")
+    public ResponseEntity<Post> createPost(@PathVariable(name = "id") long id, @Valid @RequestBody Post post){
+        Optional<User> user = userRepository.findById(id);
+
+        if (!user.isPresent()) throw new UserNotFoundException(String.format("ID[%s] not found", id));
+
+        post.setUser(user.get());
+        Post savedPost = postRepository.save(post);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedPost.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
     @GetMapping("/users/{id}/posts")
-    public List<Post> retrieveAllPostsByUser(@PathVariable Long id) {
+    public List<Post> retrieveAllPostsByUser(@PathVariable long id) {
         Optional<User> user = userRepository.findById(id);
 
         if (!user.isPresent()) throw new UserNotFoundException(String.format("ID[%s] not found", id));
