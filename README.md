@@ -39,3 +39,12 @@ spring-boot-starter-security 2.5.1, spring-data-rest-hal-browser 3.3.9.RELEASE
 RESTful API를 설계하고 개발하기 위하여 리차드슨의 REST 성숙도 모델을 참고했다.
 
 3단계의 REST API를 개발하기 위하여 필요한 기술을 학습하고 실습해보았다.
+
+## 개발 내용
+
+1. Contoller - Service - Repository 계층 구조 구현
+2. H2, Spring Data JPA를 활용한 도메인 클래스와 데이터베이스 매핑
+3. POST, GET, PUT, DELETE 메소드를 활용한 REST API 개발
+4. 예외를 ResponseEntityExceptionHandler에서 AOP로 처리 (다양한 Http Status 활용)
+5. Swagger를 활용한 REST API 문서화
+6. HATEOAS를 활용하여 link를 내포한 API 개발
