@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -30,13 +31,15 @@ public class UserService {
     }
 
     public User findOne(long id) {
-        for(User user : users) {
-            if(user.getId() == id) return user;
-        }
-        return null;
+
+        return users.stream()
+                .filter(u -> u.getId() == id)
+                .findFirst()
+                .orElse(null);
     }
 
     public User update(User user){
+
         for(User updatedUser : users){
             if(updatedUser.getId() == user.getId()) {
                 updatedUser.setName(user.getName());
